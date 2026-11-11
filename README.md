@@ -136,5 +136,3 @@ Limitations found:
   feature module sets `prefix: '/api'`.
 - **CLI:** `avi g controller public` generates `constructor(private readonly public: PublicService)`,
   which does not compile (`public` is a reserved word). Renamed by hand.
-- **CLI:** `avi generate` treats a `src/app.ts` as the minimal-template marker, so app options live
-  in `src/app.options.ts`.
