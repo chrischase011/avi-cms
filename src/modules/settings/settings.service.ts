@@ -1,5 +1,5 @@
 import { HttpError, Injectable } from '@avijs/core';
-import { inArray } from 'drizzle-orm';
+import { eq, inArray } from 'drizzle-orm';
 import { Db } from '../../database/database.module.js';
 import { media, settings } from '../../database/schema.js';
 import { MediaPresenter } from '../media/media.presenter.js';
@@ -40,6 +40,12 @@ export class SettingsService {
     const entries = Object.entries(input).filter(([, value]) => value !== undefined);
     await this.db.transaction(async (tx) => {
       for (const [key, value] of entries) {
+        // A null (no logo, no favicon) is the default, so the row goes. Drizzle would write SQL
+        // NULL rather than JSON null into the NOT NULL value column.
+        if (value === null) {
+          await tx.delete(settings).where(eq(settings.key, key));
+          continue;
+        }
         await tx
           .insert(settings)
           .values({ key, value })

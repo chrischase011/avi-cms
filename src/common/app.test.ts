@@ -59,6 +59,20 @@ test('settings: defaults, update with a logo, validation', async () => {
   assert.equal(data.siteName, 'My Blog');
   assert.equal(data.logoUrl, logo.data.url);
 
+  // The admin UI sends every field, with null for an unset logo or favicon.
+  const cleared = await admin.put('/api/settings', {
+    siteName: 'My Blog',
+    siteDescription: '',
+    siteUrl: '',
+    logoId: null,
+    faviconId: null,
+    defaultSeoTitle: '',
+    defaultSeoDescription: '',
+    postsPerPage: 5,
+  });
+  assert.equal(cleared.status, 200);
+  assert.equal((cleared.body as { data: { logoUrl: string | null } }).data.logoUrl, null);
+
   assert.equal((await admin.put('/api/settings', { postsPerPage: 0 })).status, 400);
   assert.equal((await admin.put('/api/settings', { logoId: 999_999 })).status, 400);
   const pub = await app.client.get('/api/public/settings');
