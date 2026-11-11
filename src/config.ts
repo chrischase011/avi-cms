@@ -13,7 +13,7 @@ const int = (fallback: string) =>
 // Environment variables, checked when the app starts. A .env file is read too, if present.
 const env = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-  PORT: int('3000'),
+  PORT: int('3001'),
   DATABASE_URL: z.string().url('DATABASE_URL must be a postgres:// URL'),
 
   JWT_SECRET: z.string().min(32, 'JWT_SECRET must be at least 32 characters'),
@@ -23,7 +23,7 @@ const env = z.object({
   COOKIE_SECURE: bool('false'),
 
   /** Admin UI origins allowed to call the API with cookies, comma separated. */
-  WEB_ORIGINS: z.string().default('http://localhost:3001'),
+  WEB_ORIGINS: z.string().default('http://localhost:3000'),
   /** Prepended to media URLs, e.g. https://cms.example.com. Empty keeps them relative. */
   PUBLIC_URL: z.string().default(''),
   /** Serve the built admin UI (web/dist) from the API server. */

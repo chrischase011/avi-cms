@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Starts the Avi.js API (http://localhost:3000) and the admin UI (http://localhost:3001).
+# Starts the Avi.js API (http://localhost:3001) and the admin UI (http://localhost:3000).
 set -euo pipefail
 cd "$(dirname "$0")"
 

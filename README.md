@@ -18,12 +18,12 @@ npm run install:all          # root and web/ dependencies
 cp .env.example .env         # then set DATABASE_URL, JWT_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD
 npm run db:migrate           # create the tables
 npm run db:seed              # first administrator + sample content
-npm run dev                  # API on http://localhost:3000, admin UI on http://localhost:3001
+npm run dev                  # API on http://localhost:3001, admin UI on http://localhost:3000
 ```
 
 `./run.sh` does the same as `npm run dev` and clears Vite's cache first.
 
-Sign in at http://localhost:3001 with `ADMIN_EMAIL` / `ADMIN_PASSWORD`, then remove
+Sign in at http://localhost:3000 with `ADMIN_EMAIL` / `ADMIN_PASSWORD`, then remove
 `ADMIN_PASSWORD` from `.env`.
 
 ## Scripts
